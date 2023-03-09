@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R a+x --exclude='*.*' ./
+chmod -R a+x
