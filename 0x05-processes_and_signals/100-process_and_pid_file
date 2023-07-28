@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# tells a story
+
+echo $$ > /var/run/myscript.pid
+
+end()
+{
+	rm -f /var/run/myscript.pid
+	exit
+}
+
+
+while true
+do
+	trap 'echo "Y U no love me?!"' SIGINT
+	trap 'echo "I hate the kill command" && end' SIGTERM
+	trap 'end' SIGQUIT
+	echo "To infinity and beyond"
+	sleep 2
+done
