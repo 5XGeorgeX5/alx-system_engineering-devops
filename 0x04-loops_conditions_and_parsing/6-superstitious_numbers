@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ## displays Best School 10 times.
 
 i=1
