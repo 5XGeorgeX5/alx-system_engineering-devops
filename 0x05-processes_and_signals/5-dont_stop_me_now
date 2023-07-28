@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+## displays To infinity and beyond indefinitely.
+
+
+PID=$(pgrep -x "4-to_infinity_and_beyond")
+
+if [ -n "$PID" ]
+then
+	kill "$PID"
+fi
