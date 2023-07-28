@@ -2,9 +2,4 @@
 ## displays To infinity and beyond indefinitely.
 
 
-PID=$(pgrep -x "4-to_infinity_and_beyond")
-
-if [ -n "$PID" ]
-then
-	kill -2 "$PID"
-fi
+kill "$(pgrep -x 4-to_infinity_and_beyond)"
