@@ -26,7 +26,8 @@ exec { 'add_to_server':
 }
 
 service { 'nginx':
-  ensure    => 'running',
-  enable    => true,
-  subscribe => File['/etc/nginx/sites-available/default'],
+  ensure     => 'running',
+  enable     => true,
+  hasrestart => true,
+  subscribe  => File['/etc/nginx/sites-available/default'],
 }
