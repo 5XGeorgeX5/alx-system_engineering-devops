@@ -13,7 +13,7 @@ file { '/var/www/html/error_404.html':
   content => "Ceci n'est pas une page",
 }
 
-exec { 'add_to_server'
+exec { 'add_to_server':
   command => '/bin/sed -i "/listen 80 default_server/a \\
     location /redirect_me { \\
         return 301 https://github.com/5XGeorgeX5; \\
