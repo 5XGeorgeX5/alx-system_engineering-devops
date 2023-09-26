@@ -18,20 +18,19 @@ file { '/etc/nginx/sites-available/default':
 }
 
 exec { 'add_to_server':
-  command => '/bin/sed -i "/listen 80 default_server/a \\\\
-    location /redirect_me { \\\\
-        return 301 https://github.com/5XGeorgeX5; \\\\
-    } \\\\
-    error_page 404 /error_404.html; \\\\
-    location = /error_404.html{ \\\\
-        root /var/www/html; \\\\
-        internal; \\\\
-    }" /etc/nginx/sites-available/default',
+  command => '/bin/sed -i "/listen 80 default_server/a\\\\
+        location /redirect_me {\\\\
+                return 301 https://github.com/5XGeorgeX5;\\\\
+        }\\\\
+        error_page 404 /error_404.html;\\\\
+        location = /error_404.html {\\\\
+                root /var/www/html;\\\\
+                internal;\\\\
+        }" /etc/nginx/sites-available/default',
 }
 
 service { 'nginx':
-  ensure     => 'running',
-  enable     => true,
-  hasrestart => true,
-  subscribe  => File['/etc/nginx/sites-available/default'],
+  ensure    => 'running',
+  enable    => true,
+  subscribe => File['/etc/nginx/sites-available/default'],
 }
