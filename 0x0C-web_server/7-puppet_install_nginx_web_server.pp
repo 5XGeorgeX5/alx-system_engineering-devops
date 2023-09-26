@@ -13,15 +13,19 @@ file { '/var/www/html/error_404.html':
   content => "Ceci n'est pas une page",
 }
 
+file { '/etc/nginx/sites-available/default':
+  ensure => file,
+}
+
 exec { 'add_to_server':
-  command => '/bin/sed -i "/listen 80 default_server/a \\
-    location /redirect_me { \\
-        return 301 https://github.com/5XGeorgeX5; \\
-    } \\
-    error_page 404 /error_404.html; \\
-    location = /error_404.html{ \\
-        root /var/www/html; \\
-        internal; \\
+  command => '/bin/sed -i "/listen 80 default_server/a \\\\
+    location /redirect_me { \\\\
+        return 301 https://github.com/5XGeorgeX5; \\\\
+    } \\\\
+    error_page 404 /error_404.html; \\\\
+    location = /error_404.html{ \\\\
+        root /var/www/html; \\\\
+        internal; \\\\
     }" /etc/nginx/sites-available/default',
 }
 
