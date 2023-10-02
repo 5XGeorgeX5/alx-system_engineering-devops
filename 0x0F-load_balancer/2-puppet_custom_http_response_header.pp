@@ -7,16 +7,13 @@ file { '/etc/nginx/sites-available/default':
   ensure => 'file',
 }
 
-file_line { 'header':
-  ensure  => file,
-  path    => '/etc/nginx/sites-available/default',
-  after   => 'listen 80 default_server;',
-  line    => "add_header X-Served-By ${hostname};",
-  require => Package['nginx'],
+exec { 'add_to_server':
+  command => "/bin/sed -i \"/listen 80 default_server/a\\\\
+        add_header X-Served-By ${hostname};\" /etc/nginx/sites-available/default",
 }
 
 service { 'nginx':
   ensure    => 'running',
   enable    => true,
-  subscribe => File_line['header'],
+  subscribe => File['/etc/nginx/sites-available/default'],
 }
