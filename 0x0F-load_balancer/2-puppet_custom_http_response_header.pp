@@ -9,14 +9,10 @@ package { 'nginx':
   require => Exec['update'],
 }
 
-file { '/etc/nginx/sites-available/default':
-  ensure => 'file',
-}
-
 file_line { 'header':
   ensure  => file,
   path    => '/etc/nginx/sites-available/default',
-  after   => 'listen 80 default_server;',
+  after   => ':80 default_server;',
   line    => "add_header X-Served-By ${hostname};",
   require => Package['nginx'],
 }
