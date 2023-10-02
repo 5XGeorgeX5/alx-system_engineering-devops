@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Configure your Nginx server.
+
+apt-get update
+apt-get install -y nginx
+echo "Hello World!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/error_404.html
+sed -i "/listen 80 default_server/a\\
+	location /redirect_me {\\
+		return 301 https://github.com/5XGeorgeX5;\\
+	}\\
+	error_page 404 /error_404.html;\\
+	location = /error_404.html {\\
+		root /var/www/html;\\
+		internal;\\
+	}\\
+	add_header X-Served-By $(hostname);" /etc/nginx/sites-available/default
+service nginx restart
