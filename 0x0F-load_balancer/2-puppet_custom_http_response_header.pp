@@ -24,5 +24,5 @@ file_line { 'header':
 service { 'nginx':
   ensure    => 'running',
   enable    => true,
-  subscribe => File_line['header'],
+  require => File_line['header'],
 }
