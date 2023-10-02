@@ -9,7 +9,7 @@ package { 'nginx':
   require => Exec['update'],
 }
 
-file_line { 'header':
+file_line { 'header_add':
   ensure  => file,
   path    => '/etc/nginx/sites-available/default',
   after   => ':80 default_server;',
@@ -19,5 +19,5 @@ file_line { 'header':
 
 service { 'nginx':
   ensure  => 'running',
-  require => File_line['header'],
+  require => File_line['header_add'],
 }
