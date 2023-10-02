@@ -12,4 +12,7 @@ backend back-web
 	balance roundrobin
 	server server1 100.26.166.229:80 check
 	server server2 34.202.157.96:80 check" | sudo tee -a /etc/haproxy/haproxy.cfg
+
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
 service haproxy start
