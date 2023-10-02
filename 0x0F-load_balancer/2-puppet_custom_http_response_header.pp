@@ -5,7 +5,7 @@ exec { 'update':
 }
 
 package { 'nginx':
-  ensure => 'latest',
+  ensure  => 'latest',
   require => Exec['update'],
 }
 
@@ -22,7 +22,7 @@ file_line { 'header':
 }
 
 service { 'nginx':
-  ensure    => 'running',
-  enable    => true,
+  ensure  => 'running',
+  enable  => true,
   require => File_line['header'],
 }
