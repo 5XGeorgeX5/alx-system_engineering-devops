@@ -5,7 +5,7 @@ exec { 'update':
 }
 
 package { 'nginx':
-  ensure  => 'latest',
+  ensure  => installed,
   require => Exec['update'],
 }
 
