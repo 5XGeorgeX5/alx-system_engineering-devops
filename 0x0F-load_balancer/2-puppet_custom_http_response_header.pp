@@ -10,7 +10,7 @@ package { 'nginx':
 }
 
 file_line { 'header_add':
-  ensure  => file,
+  ensure  => present,
   path    => '/etc/nginx/sites-available/default',
   after   => ':80 default_server;',
   line    => "add_header X-Served-By ${hostname};",
@@ -18,6 +18,6 @@ file_line { 'header_add':
 }
 
 service { 'nginx':
-  ensure  => 'running',
+  ensure  => running,
   require => File_line['header_add'],
 }
