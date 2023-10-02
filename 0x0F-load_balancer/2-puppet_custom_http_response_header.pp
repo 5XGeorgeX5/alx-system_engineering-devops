@@ -19,6 +19,5 @@ file_line { 'header':
 
 service { 'nginx':
   ensure  => 'running',
-  enable  => true,
   require => File_line['header'],
 }
