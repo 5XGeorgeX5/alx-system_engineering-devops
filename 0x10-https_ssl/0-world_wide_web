@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# script that will display information about subdomains.
+
+
+get_dns_info() {
+    local subdomain="$2"
+
+    if [ -z "$subdomain" ]; then
+        subdomains=("www" "lb-01" "web-01" "web-02")
+    else
+        subdomains=("$subdomain")
+    fi
+
+    for sub in "${subdomains[@]}"; do
+        dns_info=$(dig +short "$sub.$1")
+
+        record_type=$(echo "$dns_info" | awk '{if ($1 == "CNAME") print "CNAME"; else print "A"}')
+        destination=$(echo "$dns_info" | awk '{if ($1 == "CNAME") print $2; else print $1}')
+        echo "The subdomain $sub is a $record_type record and points to $destination"
+    done
+}
+
+get_dns_info "$1" "$2"
