@@ -10,10 +10,9 @@ get_dns_info() {
     fi
 
     for sub in "${subdomains[@]}"; do
-        dns_info=$(dig +short "$sub.$1")
-
-        record_type=$(echo "$dns_info" | awk '{if ($1 == "CNAME") print "CNAME"; else print "A"}')
-        destination=$(echo "$dns_info" | awk '{if ($1 == "CNAME") print $2; else print $1}')
+        dns_info=$(dig $sub.$1 | grep -A1 'ANSWER SECTION' | tail -1)
+        record_type=$(echo "$dns_info" | awk '{print $4}')
+        destination=$(echo "$dns_info" | awk '{print $5}')
         echo "The subdomain $sub is a $record_type record and points to $destination"
     done
 }
