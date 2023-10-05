@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
-# script that will display information about subdomains.
+# displays information about subdomains.
 
 
 get_dns_info() {
-    local subdomain="$2"
-
-    if [ -z "$subdomain" ]; then
+    if [ -z "$2" ]; then
         subdomains=("www" "lb-01" "web-01" "web-02")
     else
-        subdomains=("$subdomain")
+        subdomains=("$2")
     fi
 
     for sub in "${subdomains[@]}"; do
