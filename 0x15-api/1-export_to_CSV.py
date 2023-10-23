@@ -7,11 +7,11 @@ import csv
 if __name__ == "__main__":
     user = "https://jsonplaceholder.typicode.com/users/"
     todo = "https://jsonplaceholder.typicode.com/todos?userId="
-    name = get(user + argv[1]).json().get('name')
+    username = get(user + argv[1]).json().get('username')
     tasks = get(todo + argv[1]).json()
     with open(f"{argv[1]}.csv", 'w') as file:
         csv_file = csv.writer(file, quoting=csv.QUOTE_ALL)
         for task in tasks:
             status = task.get('completed')
             title = task.get('title')
-            csv_file.writerow([argv[1], name, status, title])
+            csv_file.writerow([argv[1], username, status, title])
