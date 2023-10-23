@@ -8,11 +8,13 @@ if __name__ == "__main__":
     todo = "https://jsonplaceholder.typicode.com/todos?userId="
     employees = get(user).json()
     tasks = get(todo).json()
-    data = {str(employee.get('id')): [{
-        "task": task.get('title'),
-        "completed": task.get('completed'),
-        "username": employee.get('username')
-    } for task in get(f"{todo}{employee.get('id')}").json()]
-    for employee in employees}
+    data = {
+        str(employee.get('id')): [{
+            "task": task.get('title'),
+            "completed": task.get('completed'),
+            "username": employee.get('username')
+        } for task in get(f"{todo}{employee.get('id')}").json()]
+        for employee in employees
+    }
     with open("todo_all_employees.json", 'w') as file:
         json.dump(data, file)
