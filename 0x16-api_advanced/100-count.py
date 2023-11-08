@@ -10,6 +10,9 @@ def count_words(subreddit, word_list, count={}, after=None):
     url += f"&after={after}"
     header = {'User-agent': 'ALX project'}
 
+    if not after:
+        word_list = [word.lower() for word in word_list]
+
     response = requests.get(url, headers=header, allow_redirects=False)
 
     if response.status_code != 200:
@@ -19,9 +22,9 @@ def count_words(subreddit, word_list, count={}, after=None):
     posts = data['data']['children']
 
     for post in posts:
-        title = post['data']['title'].lower()
-        for word in word_list:
-            if word.lower() in title:
+        words = post['data']['title'].lower().split()
+        for word in words:
+            if word in word_list:
                 if word in count:
                     count[word] += 1
                 else:
