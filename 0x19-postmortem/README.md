@@ -1,6 +1,6 @@
 # Service Outage Postmortem: November 5, 2023
 
-![comic](https://github.com/HeimerR/holberton-system_engineering-devops/blob/master/0x19-postmortem/comic.jpg)
+![comic](https://github.com/5XGeorgeX5/alx-system_engineering-devops/blob/master/0x19-postmortem/comic.jpg)
 
 ## Issue Summary
 - **Duration:** November 5, 2023, 10:30 AM - November 5, 2023, 1:15 PM (UTC)
